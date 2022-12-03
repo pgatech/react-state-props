@@ -1,8 +1,8 @@
-import ReactState from './components/ReactState';
+import Home from './components/Home';
 
 function App() {
   return (
-    <ReactState />
+    <Home />
   );
 }
 
