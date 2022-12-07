@@ -1,8 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import {Button, Container, Card, Col, Row} from 'react-bootstrap';
 
 const Post = (props) => {
   return (
@@ -12,8 +9,9 @@ const Post = (props) => {
                 <Card className="m-3">
                     <Card.Img variant="top" src="https://placeimg.com/200/150/tech" />
                     <Card.Body>
-                    <Card.Title>{props.data.title}</Card.Title>
-                    <Card.Text>{props.data.body}</Card.Text>
+                      <Card.Title>{props.data.title}</Card.Title>
+                      <Card.Text>{props.data.body}</Card.Text>
+                      <Button variant="danger" type="submit" onClick={()=> props.remove(props.data.id)}>Remove</Button>
                     </Card.Body>
                 </Card>
             </Col>

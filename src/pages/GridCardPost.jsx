@@ -20,6 +20,13 @@ class GridCardPost extends Component {
         })
     }
 
+    handleRemove = (data) => {
+        console.log(data)
+        axios.delete(`http://localhost:3004/posts/${data}`).then((res)=>{
+            this.getPostAPI();
+        })
+    }
+
     componentDidMount(){
         this.getPostAPI();
     }
@@ -32,7 +39,7 @@ class GridCardPost extends Component {
                     {
                         this.state.post.map(post => {
                             return(
-                                <Post key={post.id} data={post}/>
+                                <Post key={post.id} data={post} remove={this.handleRemove}/>
                             )
                         })
                     }
