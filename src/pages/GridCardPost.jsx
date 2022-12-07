@@ -13,7 +13,8 @@ class GridCardPost extends Component {
             title: '',
             body: '',
             userId: 1
-        }
+        },
+        isUpdate: false
     }
 
     getPostAPI = () => {
@@ -31,8 +32,35 @@ class GridCardPost extends Component {
         axios.post(`http://localhost:3004/posts`,this.state.formBlogPost).then((res) => {
             console.log(res);
             this.getPostAPI();
+            this.setState({
+                // Form kembali kosong
+                formBlogPost: {
+                    id: 1, 
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
         }, (err) => {
             console.log('error', err); 
+        })
+    }
+
+    //Put data to API
+    putDataToAPI = () => {
+        axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost).then(res => {
+            console.log(res);
+            this.getPostAPI();
+            this.setState({
+                isUpdate: false, 
+                // Default to Post setelah Submit Update
+                formBlogPost: {
+                    id: 1, 
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
         })
     }
 
@@ -44,13 +72,23 @@ class GridCardPost extends Component {
         })
     }
 
+    // Update Data di JSON
+    handleUpdate = (data) => {
+        console.log(data);
+        this.setState({
+            formBlogPost : data,
+            isUpdate: true
+        })
+    }
 
-    // Add Data to Form
+    // Add Data to Post
     handleFormChange = (event) => {
         // console.log('form change', event.target)
         let formBlogPostNew = {...this.state.formBlogPost};
         let timeStamp = new Date().getTime();
-        formBlogPostNew['id'] = timeStamp;
+        if(!this.state.isUpdate) {
+            formBlogPostNew['id'] = timeStamp;
+        }
         console.log(event.target.name);
         // Spesifik ke Title 
         formBlogPostNew[event.target.name] = event.target.value;
@@ -61,8 +99,22 @@ class GridCardPost extends Component {
         })
     }
 
+    // Clear Form 
+    // handleFormChangeClear = () => {
+    //     let formBlogPostNew = {...this.state.formBlogPost};
+    //     formBlogPostNew['id'] = '';
+    //     formBlogPostNew['userId'] = '';
+    //     formBlogPostNew['title'] = '';
+    //     formBlogPostNew['body'] = '';
+    // }
+
+    // Post Data to API
     handleSubmit = () => {
-        this.postDataToAPI();
+        if(this.state.isUpdate){
+            this.putDataToAPI()
+        }else{
+            this.postDataToAPI();
+        }
     }
 
     componentDidMount(){
@@ -78,12 +130,12 @@ class GridCardPost extends Component {
                             <Form>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Add Title Post</Form.Label>
-                                    <Form.Control type="text" name="title" placeholder="Enter Title" onChange={this.handleFormChange}/>
+                                    <Form.Control type="text" value={this.state.formBlogPost.title} name="title" placeholder="Enter Title" onChange={this.handleFormChange}/>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3">
                                     <Form.Label>Add Description</Form.Label>
-                                    <Form.Control as="textarea" rows={3} name="body" placeholder="Enter Description" onChange={this.handleFormChange}/>
+                                    <Form.Control as="textarea" rows={3} value={this.state.formBlogPost.body} name="body" placeholder="Enter Description" onChange={this.handleFormChange}/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit" onClick={this.handleSubmit}>Submit</Button>
                             </Form>
@@ -92,7 +144,7 @@ class GridCardPost extends Component {
                             {
                                 this.state.post.map(post => {
                                     return(
-                                        <Post key={post.id} data={post} remove={this.handleRemove}/>
+                                        <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate}/>
                                     )
                                 })
                             }
