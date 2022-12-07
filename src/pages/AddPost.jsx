@@ -10,7 +10,7 @@ const AddPost = () => {
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Add Title Post</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Title" />
+                            <Form.Control type="text" placeholder="Enter Title" onChange={this.handleFormChange}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3">
