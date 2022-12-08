@@ -9,9 +9,10 @@ const NavbarHeader = () => {
           <Navbar.Brand href="/">React Bootstrap</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/BlogPost">Blog Post</Nav.Link>
-            <Nav.Link href="/AboutMe">About Me</Nav.Link>
-            <Nav.Link href="/ContactMe">Contact Me</Nav.Link>
+            <Nav.Link href="/blog">Blog Post</Nav.Link>
+            <Nav.Link href="/projects">Projects</Nav.Link>
+            <Nav.Link href="/about">About Me</Nav.Link>
+            <Nav.Link href="/contact">Contact Me</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
