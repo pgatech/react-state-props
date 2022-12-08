@@ -2,10 +2,9 @@ import axios from 'axios';
 import React,{Component} from 'react';
 import { Fragment } from 'react';
 import { Button, Container, Form, Card, Row} from 'react-bootstrap'
-import AddPost from './AddPost';
 import Post from './Post';
 
-class GridCardPost extends Component {
+class BlogPost extends Component {
     state = {
         post: [],
         formBlogPost: {
@@ -125,7 +124,7 @@ class GridCardPost extends Component {
             return (
             <Fragment>
                 <Container>
-                    
+                    <Row>
                         <Card className="p-4 m-3">
                             <Form>
                                 <Form.Group className="mb-3">
@@ -140,6 +139,7 @@ class GridCardPost extends Component {
                                 <Button variant="primary" type="submit" onClick={this.handleSubmit}>Submit</Button>
                             </Form>
                         </Card>
+                        </Row>
                         <Row xs={1} md={2}>
                             {
                                 this.state.post.map(post => {
@@ -155,4 +155,4 @@ class GridCardPost extends Component {
     }
 }
 
-export default GridCardPost;
+export default BlogPost;

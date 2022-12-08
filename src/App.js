@@ -1,8 +1,8 @@
-import Home from './components/Home';
+import Homepage from './pages/Homepage/Homepage';
 
 function App() {
   return (
-    <Home />
+    <Homepage />
   );
 }
 
