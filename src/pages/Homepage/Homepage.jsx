@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import {BroserRouter as Router, Route, Link, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import HomeContent from "./HomeContent";
 import BlogPost from "../BlogPost/BlogPost";
 import AboutMe from "../AboutMe/AboutMe";
@@ -9,7 +9,7 @@ import NavbarHeader from "./NavbarHeader";
 class Homepage extends React.Component {
     render(){
         return(
-            <BrowserRouter>
+            <Router>
                 <Fragment>
                     <NavbarHeader/>
                     <Route path="/" exact component={HomeContent} />
@@ -17,7 +17,7 @@ class Homepage extends React.Component {
                     <Route path="/AboutMe" component={AboutMe} />
                     <Route path="/ContactMe" component={ContactMe} />
                 </Fragment>
-            </BrowserRouter>
+            </Router>
         )
     }
 }
